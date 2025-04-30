@@ -237,3 +237,20 @@ def main():
 
 if __name__ == "__main__":
     main()
+import threading
+from flask import Flask
+import os
+
+# Mini serveur Flask pour Render
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return "Bot Telegram des Chiffres et des Lettres en ligne"
+
+def run_flask():
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
+
+# Lancer Flask dans un thread à part
+threading.Thread(target=run_flask).start()
